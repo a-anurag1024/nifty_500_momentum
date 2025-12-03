@@ -1,0 +1,6 @@
+*.venv
+secrets/*
+dev_scripts/*
+data/*
+.env
+.DS_Store

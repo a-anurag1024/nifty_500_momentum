@@ -1,0 +1,12 @@
+[project]
+name = "nifty_500_momentum_modules"
+version = "0.1.0"
+description = "Modules for Nifty 500 Momentum Strategy"
+authors = [
+    { name="Aanurag", email="a.anurag1024@gmail.com" }
+]
+dependencies = []
+
+
+[tool.setuptools.packages.find]
+where = ["modules"]
