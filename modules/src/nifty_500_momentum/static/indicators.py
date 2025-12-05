@@ -109,4 +109,4 @@ def calculate_momentum_12m_1m(df: pd.DataFrame) -> pd.Series:
     if len(df) < 252:
         return pd.Series(np.nan, index=df.index)
         
-    return (df['Adj Close'].shift(21) / df['Adj Close'].shift(252)) - 1
+    return (df['Close'].shift(21) / df['Close'].shift(252)) - 1

@@ -9,6 +9,10 @@ dependencies = [
     "numpy",
     "pandas",
     "yfinance",
+    "feedparser",
+    "pyarrow",
+    "fastparquet",
+    "pydantic>=2.0.0"
 ]
 
 
