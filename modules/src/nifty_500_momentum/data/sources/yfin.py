@@ -1,6 +1,7 @@
 import yfinance as yf
 import pandas as pd
 from nifty_500_momentum.data.interfaces import StockDataSource
+import logging
 
 
 class YFinanceSource(StockDataSource):
@@ -26,5 +27,5 @@ class YFinanceSource(StockDataSource):
             return df
             
         except Exception as e:
-            print(f"Error fetching {ticker} from YFinance: {e}")
+            logging.error(f"Error fetching {ticker} from YFinance: {e}")
             return pd.DataFrame()

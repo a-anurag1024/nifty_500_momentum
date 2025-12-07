@@ -1,6 +1,7 @@
 import pandas as pd
 import requests
 import io
+import logging
 
 """
 UNIVERSE MODULE
@@ -21,7 +22,7 @@ def get_nifty500_tickers() -> dict:
     }
 
     try:
-        print("Fetching Nifty 500 list from NSE...")
+        logging.info("Fetching Nifty 500 list from NSE...")
         response = requests.get(url, headers=headers, timeout=10)
         response.raise_for_status()
         
@@ -41,16 +42,17 @@ def get_nifty500_tickers() -> dict:
             
             # Format for Yahoo Finance (add .NS suffix)
             # Some symbols might already have suffixes, handle carefully
-            formatted_symbol = f"{symbol}.NS"
+            #formatted_symbol = f"{symbol}.NS"
             
-            ticker_map[company_name] = formatted_symbol
+            #ticker_map[company_name] = formatted_symbol
+            ticker_map[symbol] = company_name
             
-        print(f"Successfully loaded {len(ticker_map)} tickers.")
+        logging.info(f"Successfully loaded {len(ticker_map)} tickers.")
         return ticker_map
 
     except Exception as e:
-        print(f"Error fetching Nifty 500 list: {e}")
-        print("Falling back to Top 10 Stocks for demo...")
+        logging.error(f"Error fetching Nifty 500 list: {e}")
+        logging.warning("Falling back to Top 10 Stocks for demo...")
         return get_fallback_tickers()
 
 
@@ -63,16 +65,16 @@ def get_full_index_info() -> pd.DataFrame:
     }
 
     try:
-        print("Fetching full Nifty 500 index information from NSE...")
+        logging.info("Fetching full Nifty 500 index information from NSE...")
         response = requests.get(url, headers=headers, timeout=10)
         response.raise_for_status()
         
         df = pd.read_csv(io.StringIO(response.content.decode('utf-8')))
-        print(f"Successfully loaded full index info with {len(df)} entries.")
+        logging.info(f"Successfully loaded full index info with {len(df)} entries.")
         return df
 
     except Exception as e:
-        print(f"Error fetching full Nifty 500 index info: {e}")
+        logging.error(f"Error fetching full Nifty 500 index info: {e}")
         return pd.DataFrame()  # Return empty DataFrame on failure
     
 

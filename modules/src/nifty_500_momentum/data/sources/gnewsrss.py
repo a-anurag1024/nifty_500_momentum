@@ -2,6 +2,7 @@ import feedparser
 import urllib.parse
 from nifty_500_momentum.data.interfaces import NewsDataSource
 
+import logging
 
 class GoogleNewsRSSSource(NewsDataSource):
     def fetch_news(self, query: str, lookback_days: int = 7) -> list:
@@ -37,5 +38,5 @@ class GoogleNewsRSSSource(NewsDataSource):
             return news_items
             
         except Exception as e:
-            print(f"Error fetching news for {query}: {e}")
+            logging.error(f"Error fetching news for {query}: {e}")
             return []

@@ -5,6 +5,7 @@ import hashlib
 from nifty_500_momentum.data.interfaces import StorageBackend
 from nifty_500_momentum.data.config import DATA_CONFIG, DataConfig
 
+import logging
 
 class LocalStorage(StorageBackend):
     def __init__(self, config: DataConfig = DATA_CONFIG) -> None:
@@ -24,7 +25,7 @@ class LocalStorage(StorageBackend):
         path = self._get_stock_path(ticker)
         # Parquet preserves index (dates) and types better than CSV
         df.to_parquet(path)
-        print(f"Saved {ticker} to {path}")
+        logging.info(f"Saved {ticker} to {path}")
 
     def load_stock(self, ticker: str) -> pd.DataFrame:
         path = self._get_stock_path(ticker)
