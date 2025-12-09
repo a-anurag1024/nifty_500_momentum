@@ -6,6 +6,12 @@ from .stocks_collector import StocksDataCollector, StocksDataCollectorInputs
 from .news_collector import NewsDataCollector, NewsDataCollectorInputs
 from enum import Enum
 
+"""
+Run Manager
+---------------
+Compatible with local storage. Would require Different implementation for cloud storage.
+"""
+
 class RunManagerConfig(BaseModel):
     base_save_dir: str
     

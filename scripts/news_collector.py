@@ -10,7 +10,7 @@ import json
 
 # --- Options ---
 RUN_ID = "run_1"
-STRATEGY = Strategies.EXPLOSIVE_BREAKOUT
+STRATEGY = Strategies.ANY
 SHORTLIST_ID = f"shortlist_{STRATEGY.value}"
 BASE_SAVE_DIR = Path("data")
 

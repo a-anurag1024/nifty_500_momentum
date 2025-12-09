@@ -20,8 +20,7 @@ class StocksDataCollector(DataCollector):
         else:
             tickers = inputs.tickers
         
-        with open(self.data_config.data_dir / "tickers.json", "w") as f:
-            json.dump(tickers, f, indent=4)
+        self.data_manager.storage.save_tickers(tickers)
             
         period = inputs.period
         force_refresh = inputs.force_refresh

@@ -1,13 +1,13 @@
 import pandas as pd
 import nifty_500_momentum.static.indicators as ind
-from nifty_500_momentum.static.strategies.base import MomentumStrategy
+from nifty_500_momentum.static.strategies.base import MomentumStrategy, StaticScoutResult
 
 
 class ReversalHunterStrategy(MomentumStrategy):
     """
     Target: MACD Crossover from low RSI
     """
-    def analyze(self, df: pd.DataFrame) -> dict:
+    def analyze(self, df: pd.DataFrame) -> StaticScoutResult:
         macd_df = ind.calculate_macd(df)
         rsi = ind.calculate_rsi(df)
         
@@ -19,7 +19,11 @@ class ReversalHunterStrategy(MomentumStrategy):
             prev_hist = macd_df['Histogram'].iloc[-2]
             l_rsi = rsi.iloc[-1]
         except IndexError:
-            return {'pass_filter': False, 'reason': "Data Error"}
+            return StaticScoutResult(
+                pass_filter=False,
+                metrics={},
+                reason="Data Error"
+            )
 
         pass_filter = False
         reason = "No Signal"
@@ -32,8 +36,9 @@ class ReversalHunterStrategy(MomentumStrategy):
             else:
                 reason = "RSI too high/low"
 
-        return {
-            'pass_filter': pass_filter,
-            'metrics': {'MACD_Hist': round(l_hist, 2), 'RSI': round(l_rsi, 2)},
-            'reason': reason
-        }
+        
+        return StaticScoutResult(
+            pass_filter=pass_filter,
+            metrics={'MACD_Hist': round(l_hist, 2), 'RSI': round(l_rsi, 2)},
+            reason=reason
+        )

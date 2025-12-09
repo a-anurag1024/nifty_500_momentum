@@ -1,12 +1,13 @@
 from pydantic import BaseModel 
 from enum import Enum
+from typing import Dict
 from pandas import DataFrame
 import json
 from pathlib import Path
 from datetime import datetime
 import logging
 
-from nifty_500_momentum.static import static_momentum_strategies
+from nifty_500_momentum.static import static_momentum_strategies, StaticScoutResult
 from nifty_500_momentum.data.manager import DataManager, DataConfig
 
 
@@ -25,7 +26,18 @@ class ShortlisterConfig(BaseModel):
     shortlist_id: str
     strategy: Strategies
     data_config: DataConfig
+
+
+class StaticShortlistResult(BaseModel):
+    shortlist_id: str
+    strategy: Strategies
+    data_config: DataConfig
+    timestamp: datetime
+    num_tickers: int
+    num_shortlisted: int
     
+    shortlisted_tickers: list[str]
+    tickers_results: Dict[str, StaticScoutResult]
     
     
 class Shortlister:
@@ -36,77 +48,80 @@ class Shortlister:
         
     def analyze_momentum(self, 
                          ticker: str,
-                         strategy: Strategies) -> dict:
+                         strategy: Strategies) -> StaticScoutResult:
         try:
             if strategy == Strategies.ANY:
-                results = {}
                 passes = []
+                metrics = {}
+                reasons = ""
                 for strat in [s for s in Strategies if s not in (Strategies.ANY, Strategies.ALL)]:
                     res = self.analyze_momentum(ticker, strat)
-                    results[strat.value] = res
-                    passes.append(res.get("pass_filter", False))
-                return {"pass_filter": any(passes), "details": results}
+                    metrics.update(res.metrics)
+                    passes.append(res.pass_filter)
+                    reasons += res.reason + "; "
+                return StaticScoutResult(
+                    pass_filter=any(passes),
+                    metrics=metrics,
+                    reason=reasons
+                )
             elif strategy == Strategies.ALL:
-                results = {}
                 passes = []
+                metrics = {}
+                reasons = ""
                 for strat in [s for s in Strategies if s not in (Strategies.ANY, Strategies.ALL)]:
                     res = self.analyze_momentum(ticker, strat)
-                    results[strat.value] = res
-                    passes.append(res.get("pass_filter", False))
-                return {"pass_filter": all(passes), "details": results}
+                    metrics.update(res.metrics)
+                    passes.append(res.pass_filter)
+                    reasons += res.reason + "; "
+                return StaticScoutResult(
+                    pass_filter=all(passes),
+                    metrics=metrics,
+                    reason=reasons
+                )
             else:
                 try:
                     df = self.data_manager.get_stock_data(ticker)
                 except Exception as e:
                     logging.error(f"Error fetching data for {ticker}: {e}. Skipping.")
-                    return {"pass_filter": False, "error": str(e)}
+                    return StaticScoutResult(
+                        pass_filter=False,
+                        metrics={},
+                        reason="Data fetch error"
+                    )
                 static_momentum_strat = static_momentum_strategies.get(strategy)
                 return static_momentum_strat.analyze(df)
         except Exception as e:
             print(f"Error analyzing momentum for {ticker} with strategy {strategy}: {e}")
-            return {}
+            return StaticScoutResult(
+                pass_filter=False,
+                metrics={},
+                reason="Analysis error"
+            )
     
     
     def shortlist(self):
-        # Locate tickers.json
-        tickers_path = self.config.data_config.data_dir / "tickers.json"
-        if not tickers_path.exists():
-            raise FileNotFoundError(f"tickers.json not found at {tickers_path}")
+        tickers = list(self.data_manager.storage.load_tickers().keys())
 
-        # Read tickers
-        with open(tickers_path, "r") as f:
-            tickers = json.load(f)
-        tickers = list(tickers.keys())
-
-        results = []
+        results = {}
         shortlisted_tickers = []
         for ticker in tickers:
             result = self.analyze_momentum(ticker, self.config.strategy)
-            results.append({
-                "ticker": ticker,
-                "result": result
-            })
-            if result.get("pass_filter", False):
+            results[ticker] = result
+            if result.pass_filter:
                 shortlisted_tickers.append(ticker)
 
-        # Prepare metadata
-        metadata = {
-            "shortlist_id": self.config.shortlist_id,
-            "strategy": self.config.strategy.value,
-            "data_config": self.config.data_config.model_dump(mode="json"),
-            "timestamp": datetime.utcnow().isoformat() + "Z",
-            "num_tickers": len(tickers),
-            "num_shortlisted": len(shortlisted_tickers)
-        }
-
-        output = {
-            "metadata": metadata,
-            "shortlisted_tickers": shortlisted_tickers,
-            "results": results
-        }
-
-        # Save results as JSON in same directory as tickers.json
-        out_path = tickers_path.parent / f"{self.config.shortlist_id}.json"
-        with open(out_path, "w") as f:
-            json.dump(output, f, indent=2)
-        print(f"Shortlist saved to {out_path}")
+        # Save results
+        output = StaticShortlistResult(
+            shortlist_id=self.config.shortlist_id,
+            strategy=self.config.strategy,
+            data_config=self.config.data_config,
+            timestamp=datetime.utcnow(),
+            num_tickers=len(tickers),
+            num_shortlisted=len(shortlisted_tickers),
+            shortlisted_tickers=shortlisted_tickers,
+            tickers_results=results
+        )
+        self.data_manager.storage.save_shortlist(
+            strategy_name=self.config.strategy.value,
+            results=output.model_dump(mode="json")
+        )

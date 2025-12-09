@@ -36,3 +36,27 @@ class StorageBackend(ABC):
     @abstractmethod
     def load_news(self, query: str) -> List[Dict]:
         pass
+    
+    @abstractmethod
+    def save_tickers(self, tickers: Dict[str, str]):
+        pass
+    
+    @abstractmethod
+    def load_tickers(self) -> Dict[str, str]:
+        pass
+    
+    @abstractmethod
+    def save_shortlist(self, strategy_name: str, results: dict):
+        pass
+    
+    @abstractmethod
+    def load_shortlist(self, strategy_name: str) -> dict:
+        pass
+    
+    @abstractmethod
+    def save_analyst_state(self, analysis_id: str, state: dict):
+        pass
+    
+    @abstractmethod
+    def load_analyst_state(self, analysis_id: str) -> dict:
+        pass

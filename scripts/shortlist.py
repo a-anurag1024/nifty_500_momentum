@@ -5,7 +5,7 @@ from nifty_500_momentum.data.config import DataConfig
 
 # --- Options ---
 RUN_ID = "run_1"
-STRATEGY = Strategies.TREND_SURFER
+STRATEGY = Strategies.ANY
 SHORTLIST_ID = f"shortlist_{STRATEGY.value}"
 
 BASE_SAVE_DIR = Path("data")  # Change as needed

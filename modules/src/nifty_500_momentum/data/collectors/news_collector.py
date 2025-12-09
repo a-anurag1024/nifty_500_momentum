@@ -16,8 +16,7 @@ class NewsDataCollectorInputs(BaseModel):
 
 class NewsDataCollector(DataCollector):
     def collect(self, inputs: NewsDataCollectorInputs) -> None:
-        with open(self.data_config.data_dir / "tickers.json", "r") as f:
-            company_names = json.load(f)
+        company_names = self.data_manager.storage.load_tickers()
             
         for ticker in inputs.tickers:
             try:

@@ -58,3 +58,48 @@ class LocalStorage(StorageBackend):
             return None # Cache expired
             
         return data['articles']
+    
+    
+    #--- Tickers Methods ---
+    def save_tickers(self, tickers: dict):
+        path = self.config.data_dir / "tickers.json"
+        with path.open('w') as f:
+            json.dump(tickers, f, indent=4)
+        logging.info(f"Saved tickers to {path}")
+
+    def load_tickers(self) -> dict:
+        path = self.config.data_dir / "tickers.json"
+        if not path.exists():
+            return None
+        with path.open('r') as f:
+            return json.load(f)
+        
+        
+    # -- Shortlist Methods ---
+    def save_shortlist(self, strategy_name: str, results: list):
+        path = self.config.data_dir / f"shortlist_{strategy_name}.json"
+        with path.open('w') as f:
+            json.dump(results, f, indent=4)
+        logging.info(f"Saved shortlist {strategy_name} to {path}")
+
+    def load_shortlist(self, strategy_name: str) -> dict:
+        path = self.config.data_dir / f"shortlist_{strategy_name}.json"
+        if not path.exists():
+            return None
+        with path.open('r') as f:
+            return json.load(f)
+        
+        
+    #  --- Analyst Methods ---
+    def save_analyst_state(self, analysis_id: str, state: dict):
+        path = self.config.data_dir / f"report_{analysis_id}.json"
+        with path.open('w') as f:
+            json.dump(state, f, indent=4)
+        logging.info(f"Saved analysis report {analysis_id} to {path}")
+        
+    def load_analyst_state(self, analysis_id: str) -> dict:
+        path = self.config.data_dir / f"report_{analysis_id}.json"
+        if not path.exists():
+            return None
+        with path.open('r') as f:
+            return json.load(f)

@@ -1,5 +1,5 @@
 from typing import Dict
-from .strategies.base import MomentumStrategy
+from .strategies.base import MomentumStrategy, StaticScoutResult
 from .strategies.explosive_breakout import ExplosiveBreakoutStrategy
 from .strategies.golden_momentum import GoldenMomentumStrategy
 from .strategies.reversal_hunter import ReversalHunterStrategy

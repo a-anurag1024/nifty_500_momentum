@@ -1,6 +1,6 @@
 from typing import Type
 import os
-from .base import BaseLLM
+from .base import BaseLLM, StructuredLLMInput
 from .openai import OpenAILLM
 # from your_anthropic_impl import AnthropicLLM
 # from your_groq_impl import GroqLLM
