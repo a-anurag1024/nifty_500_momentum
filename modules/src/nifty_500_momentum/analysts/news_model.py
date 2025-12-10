@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field, field_validator
+from pydantic import BaseModel, Field, field_validator, model_validator
 from datetime import datetime
 from typing import Optional
 from dateutil import parser as date_parser
@@ -13,30 +13,25 @@ class NewsArticle(BaseModel):
     title: str
     link: str
     source: str
-    published_raw: str = Field(alias="published") # The raw string from RSS
-    published_dt: Optional[datetime] = None       # The parsed datetime object
+    published_raw: str = Field(alias="published")
+    published_dt: Optional[datetime] = None
 
-    @field_validator('published_dt', mode='before')
-    @classmethod
-    def parse_date(cls, v, values):
-        """
-        Auto-parses the raw date string into a Python datetime object
-        upon initialization.
-        """
-        # If already a datetime, return it
-        if isinstance(v, datetime):
-            return v
-            
-        # If 'published_raw' is available in the input data
-        raw_date = values.data.get('published') or values.data.get('published_raw')
-        
-        if raw_date:
+    @model_validator(mode="after")
+    def parse_date(self):
+        # Already parsed?
+        if isinstance(self.published_dt, datetime):
+            return self
+
+        raw = self.published_raw
+        if raw:
             try:
-                # dateutil handles "Mon, 07 Dec 2025..." automatically
-                return date_parser.parse(raw_date).replace(tzinfo=None) # naive for simple math
+                self.published_dt = date_parser.parse(raw).replace(tzinfo=None)
             except Exception:
-                return datetime.now() # Fallback
-        return datetime.now()
+                self.published_dt = datetime.now()
+        else:
+            self.published_dt = datetime.now()
+
+        return self
 
     class Config:
         populate_by_name = True

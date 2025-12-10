@@ -54,7 +54,7 @@ class NewsFilterEngine:
 
     def run(self, raw_data: List[dict]) -> List[NewsArticle]:
         # 1. Convert raw dicts to Pydantic Models (Validation Layer)
-        articles = [NewsArticle(**item) for item in raw_data]
+        articles = [NewsArticle(**item) for item in raw_data] if raw_data else []
         
         # 2. Apply all strategies sequentially
         for strategy in self.strategies:

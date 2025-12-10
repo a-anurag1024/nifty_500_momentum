@@ -57,22 +57,24 @@ class OpenAILLM(BaseLLM):
     def generate_structured(self, inp: StructuredLLMInput, output_model: Type[T]) -> T:
 
         def _call():
-            return self.client.responses.create(
+            return self.client.beta.chat.completions.parse(
                 model=self.model,
-                input=inp.messages,
+                messages=inp.messages,
                 response_format=output_model,
             )
 
         response = self._with_retries(_call)
 
-        parsed = response.output_parsed  # already validated
+        parsed = response.choices[0].message.parsed
+        usage = {'input_tokens': response.usage.prompt_tokens,
+                'output_tokens': response.usage.completion_tokens}
 
         # logging
         self._log(
             interaction_type="structured",
             input_data=inp.model_dump(),
-            output_data=parsed.model_dump(),
-            usage=response.usage.model_dump() if response.usage else {},
+            output_data=parsed.model_dump(mode="json"),
+            usage=usage,
         )
 
-        return parsed
+        return response.choices[0].message.parsed
