@@ -5,6 +5,7 @@ from ..news_filters import NewsFilterEngine, NewsArticle
 
 from nifty_500_momentum.static.shortlister import StaticShortlistResult
 from nifty_500_momentum.analysts.analyzers import ComprehensiveAnalyzer, ComprehensiveMomentumAnalysis, AnalyzerInput
+from nifty_500_momentum.analysts.final_shortlist.comprehensive import ComprehensiveFinalShortlist
 
 import logging
 
@@ -44,9 +45,18 @@ class StraightforwardWorkflow(BaseWorkflow):
             state.analysis_results[ticker] = results
             self._save_state(state)
         
-        # TODO: Step-3: Final Shortlisting 
+        # Step-3: Final Shortlisting 
+        logging.info(">>> Creating final shortlist...")
+        final_shortlist_strategy = ComprehensiveFinalShortlist()
+        state.final_shortlist = final_shortlist_strategy.shortlist(
+            state.analysis_results,
+            conviction_threshold=state.conviction_threshold,
+            sentiment_threshold=state.sentiment_threshold,
+            top_n=state.top_n_final_shortlist
+        )
+        logging.info(f">>> Final Shortlist: {state.final_shortlist}")
+        self._save_state(state)
         
-        
-        # TODO: Step-4: Summary creation
+        # TODO: Step-4: Summary creation (For UI display)
         
         return state

@@ -42,9 +42,14 @@ CONFIG: Dict[str, Any] = {
 
     # News filter chain (order matters)
     "news_filter_strategies": [
-        {"strategy_name": "TimeRecencyFilter", "config": {"hours": 1800}},
+        {"strategy_name": "TimeRecencyFilter", "config": {"hours": 180}},
         {"strategy_name": "SourceBlacklistFilter", "config": {"blacklisted_sources": ["The Motley Fool"]}},
     ],
+    
+    # Analysis thresholds
+    "conviction_threshold": 5.0,
+    "sentiment_threshold": 0.1,
+    "top_n_final_shortlist": 5,
 }
 
 
@@ -92,6 +97,9 @@ def main() -> None:
         NEWS_QUERY_PREFIX=news_query_prefix,
         NEWS_QUERY_SUFFIX=news_query_suffix,
         news_filters=news_filters,
+        conviction_threshold=CONFIG["conviction_threshold"],
+        sentiment_threshold=CONFIG["sentiment_threshold"],
+        top_n_final_shortlist=CONFIG["top_n_final_shortlist"],
         filtered_news={},
         analysis_results={},
     )
