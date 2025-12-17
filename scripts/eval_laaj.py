@@ -1,4 +1,5 @@
 from datetime import datetime
+import json
 from pathlib import Path
 from nifty_500_momentum.data.config import DataConfig
 from nifty_500_momentum.data.manager import DataManager
@@ -49,5 +50,9 @@ if __name__ == "__main__":
                                         strategy_name=STRATEGY.value)
 
     print("\n--- FINAL REPORT ---")
-    print(report)
-    print(report["summary"])
+    print(f"Total Samples Evaluated: {report['summary']['total_samples']}")
+    print(f"Average Judge Score: {report['summary']['average_judge_score']}/10")
+    print(f"LLM Model Used: {report['summary']['model_used']}")
+    
+    with open(BASE_SAVE_DIR / "data" / RUN_ID / f"{ANALYSIS_ID}_laaj_report.json", "w") as f:
+        json.dump(report, f, indent=4)

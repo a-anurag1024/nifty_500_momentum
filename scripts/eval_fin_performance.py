@@ -1,5 +1,6 @@
 from datetime import datetime
 from pathlib import Path
+import json
 from nifty_500_momentum.data.config import DataConfig
 from nifty_500_momentum.data.manager import DataManager
 from nifty_500_momentum.data.collectors.run_manager import (
@@ -119,4 +120,21 @@ if __name__ == "__main__":
     )
 
     print("\n--- FINAL REPORT ---")
-    print(report['metrics'])
+    #print(report['metrics'])
+    print(f"-- eval_date: {report['metrics']['eval_date']}")
+    print(f"-- horizon_days: {report['metrics']['horizon_days']}")
+    print("--- Win Rate ---")
+    print(f"-- win_rate_selected: {report['metrics']['win_rate_selected']}%")
+    print(f"-- win_rate_rejected: {report['metrics']['win_rate_rejected']}%")
+    print("--- Return Quality ---")
+    print(f"-- consistency_spread: {report['metrics']['consistency_spread']}%")
+    print(f"-- median_return_selected: {report['metrics']['median_return_selected']}%")
+    print(f"-- median_return_rejected: {report['metrics']['median_return_rejected']}%")
+    print(f"-- median_alpha: {report['metrics']['median_alpha']}%")
+    print("--- Risk Profile ---")
+    print(f"-- volatility_selected: {report['metrics']['volatility_selected']}%")
+    print(f"-- volatility_rejected: {report['metrics']['volatility_rejected']}%")
+    print(f"-- risk_reduction: {report['metrics']['risk_reduction']}%")
+    
+    with open(BASE_SAVE_DIR / "data" / RUN_ID / f"{ANALYSIS_ID}_fin_performance_report.txt", "w") as f:
+        json.dump(report, f, indent=4)
