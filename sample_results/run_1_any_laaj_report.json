@@ -1,0 +1,109 @@
+{
+    "summary": {
+        "total_samples": 20,
+        "average_judge_score": 8.7,
+        "model_used": "gpt-4.1-mini"
+    },
+    "details": [
+        {
+            "grade": 9,
+            "critique": "The analyst correctly identifies the primary driver as 'Corporate Action' based on the share buyback news, which is the main positive catalyst mentioned. The conviction score of 7 aligns well with the moderately positive sentiment and mixed technical signals (weak momentum but strong relative strength). No obvious red flags were missed, and the reasoning is sound. However, they could have slightly emphasized the weak momentum more in their conviction score rationale to justify the score better.",
+            "correct_driver": "Corporate Action"
+        },
+        {
+            "grade": 9,
+            "critique": "The analyst correctly identified the primary driver as 'Earnings/Guidance', supported by news indicating Q2 profit growth and a large capex plan which qualifies as positive earnings and guidance news. They also appropriately included 'Macro/Sector Trend' as a secondary driver given the globally rising copper prices boosting metal stocks. The conviction score of 8 aligns well with the strong technical signals and positive news, showing consistent sentiment. No red flags or risk signals were missed. The only minor shortcoming is that 'Order/Contract Win' is less supported explicitly by the provided news, which could have been omitted or justified further. Overall, the reasoning is strong and coherent with no major errors.",
+            "correct_driver": ""
+        },
+        {
+            "grade": 9,
+            "critique": "The analyst correctly identified the primary driver as 'Regulatory/Govt Policy' reflecting the RBI rate cut, which significantly impacts banks like Canara Bank. The conviction score of 7 is reasonable given the positive sentiment around rate cuts and steady technical signals, while acknowledging some analyst division on future rallies. However, the analyst missed a minor red flag in the news regarding the \"Locker Dispute and Legal-heir Battle\" which could pose reputational risks, although it may not be immediate or severely negative. Overall, good risk detection and driver accuracy with a well-justified score.",
+            "correct_driver": "Regulatory/Govt Policy"
+        },
+        {
+            "grade": 9,
+            "critique": "The analyst correctly identified 'Capacity/Product Launch' as the primary driver given the news about expansion plans regarding the new bauxite mines, which is the main positive catalyst. They also noted the sector/macro trend as a secondary driver, appropriate given the strong technical indicators and bullish news. The conviction score of 7 aligns well with the comparatively strong sentiment but tempered by the moderate downside in 12M momentum and high RSI suggesting possible overbought conditions. The analyst did not miss any red flags. The only minor drawback is that the momentum signal was mixed (weak overall) which could have been emphasized more as a caution, but the overall reasoning is sound and balanced.",
+            "correct_driver": "Capacity/Product Launch"
+        },
+        {
+            "grade": 9,
+            "critique": "The analyst correctly identified the primary driver as 'Earnings/Guidance' based on the strong earnings report detailed in the news, which is appropriate. They also accounted for secondary speculation/technical drivers, matching the technical signals provided. The conviction score of 7 aligns well with the positive sentiment but remains moderate, reflecting steady optimism rather than overly exuberant confidence. No red flags were missed, and the reasoning is logical and well supported. However, the analyst could have noted the very high RSI (close to overbought) as a potential caution, which would have slightly improved risk detection and nuance in conviction.",
+            "correct_driver": "Earnings/Guidance"
+        },
+        {
+            "grade": 8,
+            "critique": "The analyst correctly identified a positive sentiment and a relatively high conviction score consistent with the news of the stock hitting all-time highs, analyst upgrades, and expansion in capacity/products. However, the primary driver chosen, 'Capacity/Product Launch', is not explicitly supported by the provided news headlines, which mainly emphasize analyst upgrades, price performance, and positive sentiment rather than confirmed product launches. The primary driver should have been 'Analyst Upgrade/Downgrade' or 'Price Momentum' given the news references. The conviction score of 7 fits the generally positive but not overwhelmingly bullish tone of the news and technicals. No significant red flags were missed. Overall, the analysis is good but could improve driver accuracy by better tying news content to driver choice.",
+            "correct_driver": "Analyst Upgrade/Downgrade"
+        },
+        {
+            "grade": 9,
+            "critique": "The analyst correctly identified the primary driver as 'Earnings/Guidance' based on the significant 72.2% profit increase due to the licensing deal. They also noted the management change as a secondary driver, which is accurate given the appointment of a new interim CEO. They flagged the ongoing price-fixing suit as a red flag, demonstrating good risk awareness. The conviction score of 8 aligns well with the mostly positive news tempered by potential legal risks. The only minor critique is that the analyst should have emphasized the potential impact of the price-fixing suit a bit more cautiously. Otherwise, their reasoning is sound and consistent with the provided news and technicals.",
+            "correct_driver": ""
+        },
+        {
+            "grade": 10,
+            "critique": "The analyst accurately identified the primary driver as 'Order/Contract Win' based on multiple consistent news reports about the long-term supply agreement with Honeywell Aerospace. They correctly linked this positive event to the strong technical signals such as the surge in stock price, high relative strength, large ROC, and the overall price uptrend. No obvious risks or red flags were missed, and the conviction score of 8 is sensible given the positive developments and substantial supporting technical momentum. The reasoning is clear and well-founded, justifying a high conviction score.",
+            "correct_driver": "Order/Contract Win"
+        },
+        {
+            "grade": 9,
+            "critique": "The analyst correctly identified the primary driver as the 'Analyst Upgrade/Downgrade', which is the key positive news impacting the sentiment. They also appropriately recognized the strategic deal with Saudi Aramco as a secondary driver. The conviction score of 8 aligns well with the moderately strong positive news and mixed technical signals (steady uptrend despite weak momentum). No obvious red flags were missed, and the reasoning is coherent and justified. The only minor critique is that the analyst could have emphasized the potential short-term risk related to weak momentum despite the long-term uptrend, but this does not significantly detract from the overall assessment.",
+            "correct_driver": "Analyst Upgrade/Downgrade"
+        },
+        {
+            "grade": 9,
+            "critique": "The analyst correctly identified the primary driver as 'Order/Contract Win', which aligns well with the news about ZF India securing a big ADAS deal. They have rationally assigned a high conviction score of 8, which matches the positive sentiment and the strong technical momentum indicators. The inclusion of 'Speculation/Technical' as a secondary driver is appropriate given the supporting technical signals. No obvious red flags were missed. The grade is slightly less than perfect because the analyst could have acknowledged the relatively low RVOL (0.4) which might suggest lower trading volume and potentially less conviction than the momentum indicators alone suggest.",
+            "correct_driver": "Order/Contract Win"
+        },
+        {
+            "grade": 9,
+            "critique": "The analyst correctly identified 'Corporate Action' as the primary driver, which aligns well with the news about debt expansion, board approvals, and investments. The reasoning appropriately notes the weak technical momentum and cautiously assigns a moderate conviction score of 5, consistent with the generally positive corporate development but tempered technical signals. No obvious red flags were missed, and the sentiment score of 0.4 reflects mild positivity. One minor point is the inclusion of 'Macro/Sector Trend' as a secondary driver without explicit news references; however, this is a reasonable assumption given the global expansion details. Overall, the analysis is sound and well balanced.",
+            "correct_driver": "Corporate Action"
+        },
+        {
+            "grade": 8,
+            "critique": "The analyst correctly identified that the news did not contain strong fundamental drivers like earnings or major corporate actions, and settled on 'Speculation/Technical' as the primary driver. This aligns with the weak momentum signal and mixed technical indicators. The conviction score of 3 matches the modestly positive but uncertain sentiment in the news and technicals, showing reasonable score rationality. However, the analyst missed the potential significance of 'Stake Sale' mentioned, which can be a notable event affecting ownership structure and stock sentiment. This could have been considered as a secondary or co-driver under 'Corporate Action' or 'Ownership Change'. Hence, a slight deduction for missing this risk flag and driver nuance.",
+            "correct_driver": "Speculation/Technical"
+        },
+        {
+            "grade": 8,
+            "critique": "The analyst correctly identified that the news does not provide any direct positive or negative fundamental drivers related to earnings, orders, or corporate actions, and instead attributed the stock's performance to speculation and technical factors. The primary driver 'Speculation/Technical' fits the context given the absence of company-specific news. However, the analyst missed a small risk signal from the news mentioning Ola's 64% crash, which may reflect some sector-specific risk or negative sentiment that could spill over, especially since momentum is weak despite a steady uptrend. The conviction score of 3 is reasonable given the mixed signals and lack of clear catalyst, but considering negative sector news, a lower conviction or a slight negative sentiment could have been noted. Overall, the reasoning is sound but slightly incomplete regarding sector risks.",
+            "correct_driver": "Speculation/Technical"
+        },
+        {
+            "grade": 8,
+            "critique": "The analyst correctly identified 'Speculation/Technical' as the primary driver given the news largely reflects momentum in stock price and sector-wide trends rather than specific fundamental developments. The conviction score of 4 is reasonable given the moderate positive sentiment but absence of concrete fundamental catalysts. However, the analyst missed an opportunity to highlight the impact of the RBI repo rate cut on the sector momentum, which is a macro driver that could have been more emphasized. Overall, the reasoning is thoughtful and aligns well with the news and technical data.",
+            "correct_driver": "Speculation/Technical"
+        },
+        {
+            "grade": 9,
+            "critique": "The analyst correctly identifies the primary driver as 'Noise/Unknown', which fits the news showing broader sector disruptions and unreliable short-term movements rather than firm-specific fundamental changes. They also appropriately assign a low conviction score of 3 consistent with the weak negative sentiment influenced by travel chaos and sector turbulence. The reasoning captures the weak momentum and sector-based volatility well. The only minor improvement could be to make the primary driver slightly more explicit as 'Sector Trend' or 'Sector Noise', but 'Noise/Unknown' is acceptable given the circumstances. Overall, the evaluation is accurate and thorough.",
+            "correct_driver": "Noise/Unknown"
+        },
+        {
+            "grade": 9,
+            "critique": "The analyst correctly identified the primary driver as 'Speculation/Technical' since the news headlines do not report fundamental changes but focus on momentum and sector trends, matching the technical signals' weak momentum indication. The conviction score of 2 is reasonable given the lack of concrete positive or negative news and mixed technical metrics. There are no missed red flags. However, the analyst might have elaborated slightly more on the potential risk from weak momentum signs, but overall the interpretation and rationale are strong.",
+            "correct_driver": "Speculation/Technical"
+        },
+        {
+            "grade": 8,
+            "critique": "The analyst correctly identified the lack of significant fundamental news on Persistent Systems and linked the price move primarily to technical factors and sector momentum, which is consistent with the input news headlines and technical signals. The conviction score of 3 reflects moderate confidence given the mixed technical signals\u2014strong ADX and RSI but negative momentum indicators\u2014which is reasonable. However, the 'Speculation/Technical' driver is somewhat general and could have been more precisely labeled as 'Technical Momentum' or 'Technical Indicators' to better reflect the signal details. Also, the analyst did not identify any red flags; however, the relatively high RSI near 70.67 (indicating possible overbought conditions) could be considered a cautionary note. Overall, reasoning is sound and consistent with the data provided, but slight improvements in driver precision and red-flag acknowledgement could enhance the assessment.",
+            "correct_driver": "Technical Momentum"
+        },
+        {
+            "grade": 9,
+            "critique": "The analyst appropriately identified 'Speculation/Technical' as the primary driver, which aligns well with the weak momentum signals and lack of concrete news catalysts. The conviction score of 2 is reasonable given the mixed and mostly neutral news headlines and the technical indicators that show weak momentum despite high relative strength. No obvious red flags were missed, and the reasoning is coherent. The only minor point is the relatively high ADX (32.29) which can sometimes indicate a strengthening trend, but overall the score and driver choice are consistent with the data.",
+            "correct_driver": "Speculation/Technical"
+        },
+        {
+            "grade": 8,
+            "critique": "The analyst correctly identified that the news primarily pertains to partnerships, sector developments, and macro factors rather than fundamental company-specific drivers such as earnings or order wins. However, labeling the primary driver as 'Noise/Unknown' may be slightly pessimistic given that the news includes meaningful sector collaborations and strategic agreements, which could be better categorized under 'Macro/Sector Trend' as the primary driver. The conviction score of 3 appropriately reflects the weak technical momentum and muted positive sentiment from the news. No obvious red flags were missed. Overall, the reasoning aligns well with the information, but a more precise primary driver choice would improve the assessment.",
+            "correct_driver": "Macro/Sector Trend"
+        },
+        {
+            "grade": 8,
+            "critique": "The analyst correctly identified the primary driver as 'Macro/Sector Trend' since the news relates to sector-wide issues like regulatory advisories and bond issuance impacting the industry rather than the individual company. The conviction score of 3 reflects cautious sentiment due to weak technical momentum and neutral news impact, which is rational. However, the analyst missed a subtle negative risk flag embedded in the news where the MNRE advised NBFCs to halt renewable energy lending due to overcapacity concerns. This could imply potential downside risks for companies exposed to the renewable energy sector, suggesting some downside risk that could justify slightly more caution. The reasoning is otherwise sound.",
+            "correct_driver": "Macro/Sector Trend"
+        }
+    ]
+}

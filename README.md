@@ -293,6 +293,14 @@ run_1/
 └── news/                          # News articles (JSON)
 ```
 
+### Sample Run Results
+
+See [sample analysis](sample_results/sample_run_analysis.md) for a sample run results including:
+- [shortlist_any.json](sample_results/shortlist_any.json) - Technical Shortlist details
+- [report_run_1_any.json](sample_results/report_run_1_any.json) - LLM analysis report
+- [run_1_any_fin_performance_report.json](sample_results/run_1_any_fin_performance_report.json) - Financial performance evaluation
+- [run_1_any_laaj_report.json](sample_results/run_1_any_laaj_report.json) - LAAJ (LLM as a Judge) evaluation results
+
 ## ⚠️ Limitations & Risks
 
 1. **Market Risk**: Past momentum does not guarantee future performance
